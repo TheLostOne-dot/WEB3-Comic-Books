@@ -10,8 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Product;
 
 Route::get('/','PagesController@home');
 Route::get('/shop','PagesController@shop');
 Route::get('/contact','PagesController@contact');
 Route::get('/about','PagesController@about');
+Route::get('/overview','OverviewController@index');
+Route::get('/full/{product}','OverviewController@all');
