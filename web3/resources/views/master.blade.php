@@ -3,14 +3,19 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>Comic book shop</title>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" >
 </head>
 <body>
+<nav>
 <ul>
     <li><a href="/">Home</a> </li>
     <li><a href="/shop">Shop</a> </li>
     <li><a href="/contact">Contact Us</a> </li>
     <li><a href="/about">About us</a> </li>
+    <li><a href="/overview">Overview</a> </li>
 </ul>
+</nav>
 @yield ('content')
 </body>
 </html>
+
