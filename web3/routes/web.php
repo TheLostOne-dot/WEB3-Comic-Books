@@ -18,3 +18,6 @@ Route::get('/contact','PagesController@contact');
 Route::get('/about','PagesController@about');
 Route::get('/overview','OverviewController@index');
 Route::get('/full/{product}','OverviewController@all');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
