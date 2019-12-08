@@ -18,6 +18,8 @@ Route::get('/contact','PagesController@contact');
 Route::get('/about','PagesController@about');
 Route::get('/overview','OverviewController@index');
 Route::get('/full/{product}','OverviewController@all');
+Route::get('profile/{user}',  ['as' => 'profile', 'uses' => 'UserProfileController@edit']);
+Route::patch('profile/{user}/update',  ['as' => 'profile', 'uses' => 'UserProfileController@update']);
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
