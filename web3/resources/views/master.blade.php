@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>Comic book shop</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" >
+    <link href="{{asset('css/slideshow.css')}}" rel="stylesheet" type="text/css">
 </head>
 <body>
 <nav>
@@ -15,7 +16,12 @@
     <li><a href="/overview">Overview</a> </li>
 </ul>
 </nav>
+<div class="main">
 @yield ('content')
+</div>
+<footer>
+    <p>As of right now the footer is empty</p>
+</footer>
 </body>
 </html>
 
