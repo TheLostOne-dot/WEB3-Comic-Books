@@ -14,15 +14,19 @@ class AddProducts extends Migration
     public function up()
     {
         DB::table('products')->insert(array(
-            'product_name'=>'Detectives comics Volume 3 Issue 1016',
+            'product_name'=>'Detectives comics',
             'stock'=>5,
+            'volume'=>3,
+            'issue'=>1016,
             'price'=>4.99,
             'created_at'=>date('Y-m-d H:m:s')   ,
             'updated_at'=>date('Y-m-d H:m:s')
         ));
 
         DB::table('products')->insert(array(
-            'product_name'=>'Detectives comics Volume 3 Issue 1017',
+            'product_name'=>'Detectives comics',
+            'volume'=>3,
+            'issue'=>1017,
             'stock'=>6,
             'price'=>4.99,
             'created_at'=>date('Y-m-d H:m:s')   ,
@@ -30,7 +34,9 @@ class AddProducts extends Migration
         ));
 
         DB::table('products')->insert(array(
-            'product_name'=>'Detectives comics Volume 3 Issue 1018',
+            'product_name'=>'Detectives comics',
+            'volume'=>3,
+            'issue'=>1018,
             'stock'=>8,
             'price'=>4.99,
             'created_at'=>date('Y-m-d H:m:s')   ,
