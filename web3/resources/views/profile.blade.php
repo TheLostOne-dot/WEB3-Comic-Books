@@ -1,7 +1,7 @@
 @extends ('master')
 
 @section ('content')
-    <form method="post" action="{{route('profile', $user)}}">
+    <form method="post" action="{{route('profile',$user)}}">
         {{ csrf_field() }}
         {{ method_field('patch') }}
 
@@ -9,10 +9,10 @@
 
         <input type="email" name="email"  value="{{ $user->email }}" />
 
-        <input type="password" name="password" />
+        <input type="password" name="password" >
 
-        <input type="password" name="password_confirmation" />
+        <input type="password" name="password_confirmation" >
 
         <button type="submit">Send</button>
     </form>
-    @endsection
+@endsection
