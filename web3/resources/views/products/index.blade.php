@@ -14,7 +14,7 @@
 
 
     @foreach($products as $product)
-        <li><a href="products/{{$product->id}}/edit">{{$product->id}} {{$product->name}}</a></li>
+        <li><a href="products/{{$product->id}}">{{$product->id}} {{$product->name}}</a></li>
     @endforeach
 
 </body>

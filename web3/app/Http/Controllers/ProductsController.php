@@ -14,6 +14,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
+        abort_if(auth()->user()->admin !==1,403);
         $products=Product::all();
 
 
@@ -36,17 +37,16 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        $product=new Product();
-
-        $product->name=request('name');
-        $product->volume=(int)request('volume');
-        $product->issue=(int)request('issue');
-        $product->price=(double)request('price');
-        $product->stock=(int)request('stock');
-
-        $product->save();
+        $info=request()->validate([
+            'name'=> 'required',
+            'volume'=> 'required',
+            'issue'=> 'required',
+            'price'=> 'required',
+            'stock'=> 'required'
+        ]);
+        Product::create($info);
 
         return redirect('/products');
     }
@@ -59,7 +59,7 @@ class ProductsController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return view('products.show',compact('product'));
     }
 
     /**
@@ -68,9 +68,8 @@ class ProductsController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        $product=Product::findOrFail($id);
         return view('products.edit',compact('product'));
     }
 
@@ -81,20 +80,10 @@ class ProductsController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(Product $product)
     {
-        $product=Product::findOrFail($id);
-
-        $product->name=request('title');
-        $product->volume=(int)request('volume');
-        $product->issue=(int)request('issue');
-        $product->price=(double)request('price');
-        $product->stock=(int)request('stock');
-
-        $product->save();
-
+        $product->update(request(['name','volume','issue','price','stock']));
         return redirect('/products');
-//        dd(request()->all());
     }
 
     /**
@@ -103,9 +92,9 @@ class ProductsController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        Product::findOrFail($id)->delete();
+        $product->delete();
         return redirect('/products');
     }
 }
