@@ -14,7 +14,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        abort_if(auth()->user()->admin !==1,403);
+
+        //abort_if(auth()->user()->admin !==1,403);
         $products=Product::all();
 
 
@@ -59,6 +60,7 @@ class ProductsController extends Controller
      */
     public function show(Product $product)
     {
+        $this->authorize('view',$product);
         return view('products.show',compact('product'));
     }
 
@@ -70,6 +72,7 @@ class ProductsController extends Controller
      */
     public function edit(Product $product)
     {
+        $this->authorize('view',$product);
         return view('products.edit',compact('product'));
     }
 
