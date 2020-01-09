@@ -17,28 +17,28 @@
        <div class="field">
            <label class="label" for="volume">Volume</label>
            <div class="control">
-               <textarea name="volume" class="textarea" required>{{$product->volume}}</textarea>
+               <input type="text" class="input" name="volume" placeholder="Volume" value="{{$product->volume}}" required>
            </div>
        </div>
 
        <div class="field">
            <label class="label" for="">Issue</label>
            <div class="control">
-               <textarea name="issue" class="textarea" required>{{$product->issue}}</textarea>
+               <input type="text" class="input" name="issue" placeholder="Issue" value="{{$product->issue}}" required>
            </div>
        </div>
 
        <div class="field">
            <label class="label" for="">Price</label>
            <div class="control">
-               <textarea name="price" class="textarea" required>{{$product->price}}</textarea>
+               <input type="text" class="input" name="price" placeholder="Price" value="{{$product->price}}" required>
            </div>
        </div>
 
        <div class="field">
            <label class="label" for="">Stock</label>
            <div class="control">
-               <textarea name="stock" class="textarea" required>{{$product->stock}}</textarea>
+               <input type="text" class="input" name="stock" placeholder="Stock" value="{{$product->stock}}" required>
            </div>
        </div>
 
