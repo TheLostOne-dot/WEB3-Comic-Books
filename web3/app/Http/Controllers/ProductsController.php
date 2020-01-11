@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image as Image;
 
 class ProductsController extends Controller
 {
@@ -49,6 +52,7 @@ class ProductsController extends Controller
         ]);
         Product::create($info);
 
+
         return redirect('/products');
     }
 
@@ -74,6 +78,7 @@ class ProductsController extends Controller
     {
         $this->authorize('view',$product);
         return view('products.edit',compact('product'));
+
     }
 
     /**
@@ -83,9 +88,25 @@ class ProductsController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Product $product)
+    public function update(Product $product,Request $request)
     {
         $product->update(request(['name','volume','issue','price','stock']));
+        if($request->has('pic')) {
+
+            $pic = $request->file('pic');
+            $extension = $request->file('pic')->getClientOriginalExtension();
+
+            $filename = 'product';
+            $normal = Image::make($pic)->resize(250, 250)->encode($extension);
+
+
+            Storage::disk('s3')->put('/products/'."$product->id".'/'."{$filename}", (string)$normal, 'public');
+
+
+            $product = Product::findorFail("$product->id");
+            $product->pic = $filename;
+            return redirect()->back();
+        }
         return redirect('/products');
     }
 
@@ -100,4 +121,5 @@ class ProductsController extends Controller
         $product->delete();
         return redirect('/products');
     }
+
 }

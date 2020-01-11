@@ -27,4 +27,3 @@ Route::post('profile/{user}/store',['as' => 'profile', 'uses' => 'UserProfileCon
 
 
 
-
