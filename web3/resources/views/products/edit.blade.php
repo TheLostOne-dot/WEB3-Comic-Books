@@ -49,17 +49,21 @@
            </div>
        </div>
    </form>
-    <img src="{{Storage::disk('s3')->url('products/'.auth()->id().'/')}}">
 
-    <form method="post" action="/avatars" enctype="multipart/form-data">
+    <img src="{{Storage::disk('s3')->url('products/'.$product->id.'/product')}}">
+
+    <form method="POST" action="/products/{{$product->id}}"  enctype="multipart/form-data">
+        {{method_field('PATCH')}}
         {{ csrf_field() }}
 
         <div class="field">
-            <input type="file" name="avatar" >
+            <input type="file" name="pic" >
         </div>
         <div>
             <button type="submit">Upload/Change Avatar</button>
         </div>
+
+    </form>
     <form method="POST" action="/products/{{$product->id}}">
         {{method_field('DELETE')}}
         {{csrf_field()}}
