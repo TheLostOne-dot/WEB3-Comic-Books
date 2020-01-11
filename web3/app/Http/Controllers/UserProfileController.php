@@ -59,6 +59,27 @@ class UserProfileController extends Controller
             return back();
         }
     }
+    public function store(Request $request)
+    {
+        if($request->has('avatar')){
 
+            $avatar = $request->file('avatar');
+            $extension = $request->file('avatar')->getClientOriginalExtension();
+
+            $filename='avatar';
+            $ui=auth()->id();
+            $normal = Image::make($avatar)->resize(250 , 250)->encode($extension);
+
+
+            Storage::disk('s3')->put('/avatars/'."{$ui}".'/'."{$filename}", (string)$normal, 'public');
+
+            
+            $user = User::findorFail(Auth::user()->id);
+            $user->avatar = $filename;
+//            $user->save();
+
+            return redirect()->back();
+        }
+    }
 
 }

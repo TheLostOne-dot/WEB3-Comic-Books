@@ -23,13 +23,8 @@ Route::patch('profile/{user}/update',  ['as' => 'profile', 'uses' => 'UserProfil
 Auth::routes();
 Route::resource('products','ProductsController');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::post('/avatars',function(){
-    $file=request()->file('avatar');
-    $ext=$file->guessClientExtension();
-    $file->storeAs('avatars/'.auth()->id(),"avatar",'s3');
-    // request()->file('avatar')->store('avatars','s3');
-    return back();
-});
+Route::post('profile/{user}/store',['as' => 'profile', 'uses' => 'UserProfileController@store']);
+
 
 
 
