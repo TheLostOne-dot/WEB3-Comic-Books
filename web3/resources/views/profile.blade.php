@@ -37,10 +37,12 @@
         <button type="submit">Change</button>
     </form>
 
+
     <img src="{{Storage::disk('s3')->url('avatars/'.auth()->id().'/avatar')}}">
 
-    <form method="post" action="/avatars" enctype="multipart/form-data">
+    <form method="post" action="{{route('profile',$user)}}" enctype="multipart/form-data">
         {{ csrf_field() }}
+
 
         <div class="field">
     <input type="file" name="avatar" >
