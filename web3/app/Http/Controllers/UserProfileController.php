@@ -66,18 +66,25 @@ class UserProfileController extends Controller
             $avatar = $request->file('avatar');
             $extension = $request->file('avatar')->getClientOriginalExtension();
 
+
             $filename='avatar';
             $ui=auth()->id();
+            //Resize
+
             $normal = Image::make($avatar)->resize(250 , 250)->encode($extension);
 
+            //Make image in to a circle
+            //$normal=Image::make($avatar)->mask('public/mask.png');
 
+
+            //Store on S3
             Storage::disk('s3')->put('/avatars/'."{$ui}".'/'."{$filename}", (string)$normal, 'public');
 
-            
+
             $user = User::findorFail(Auth::user()->id);
             $user->avatar = $filename;
-//            $user->save();
-
+            //$user->save();
+          //return dd($avatar);
             return redirect()->back();
         }
     }
