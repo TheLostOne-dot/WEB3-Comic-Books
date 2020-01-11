@@ -49,7 +49,17 @@
            </div>
        </div>
    </form>
+    <img src="{{Storage::disk('s3')->url('products/'.auth()->id().'/')}}">
 
+    <form method="post" action="/avatars" enctype="multipart/form-data">
+        {{ csrf_field() }}
+
+        <div class="field">
+            <input type="file" name="avatar" >
+        </div>
+        <div>
+            <button type="submit">Upload/Change Avatar</button>
+        </div>
     <form method="POST" action="/products/{{$product->id}}">
         {{method_field('DELETE')}}
         {{csrf_field()}}

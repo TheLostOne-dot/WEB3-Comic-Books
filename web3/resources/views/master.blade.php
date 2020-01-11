@@ -10,36 +10,36 @@
 
 <nav>
     <div class="container">
-<ul>
+        <ul>
         <li><a href="/">Home</a> </li>
         <li><a href="/shop">Shop</a> </li>
         <li><a href="/contact">Contact Us</a> </li>
         <li><a href="/about">About us</a> </li>
         <li><a href="/overview">Overview</a> </li>
                 @guest
-                    <li><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
+        <li><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
                    @if (Route::has('register'))
-                        <li><a href="{{ route('register') }}">{{ __('Register') }}</a></li>
+            <li><a href="{{ route('register') }}">{{ __('Register') }}</a></li>
                     @endif
                 @else
-            <li>
-                <a href="/profile/{{Auth::user()->id}}" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+        <li>
+            <a href="/profile/{{Auth::user()->id}}" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
                     {{ Auth::user()->name }} <span class="caret"></span></a>
-                           <li> <a href="{{ route('logout') }}"
+        <li> <a href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
-                            </a>
+            </a>
         </li>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
-                        </div>
-                    </li>
+    </div>
+    </li>
                 @endguest
-        </div>
-</ul>
+                </div>
+    </ul>
 </nav>
 
 <div class="main">
