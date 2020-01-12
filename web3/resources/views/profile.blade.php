@@ -2,7 +2,7 @@
 
 @section ('content')
 
-    <form method="post" action="{{route('profile',$user)}}">
+    <form method="post" action="{{route('profile',$user->id)}}">
         {{ csrf_field() }}
         {{ method_field('patch') }}
 
@@ -40,8 +40,9 @@
 
     <img src="{{Storage::disk('s3')->url('avatars/'.auth()->id().'/avatar')}}">
 
-    <form method="post" action="{{route('profile',$user)}}" enctype="multipart/form-data">
+    <form method="POST" action="{{route('profile',$user)}}" enctype="multipart/form-data">
         {{ csrf_field() }}
+        {{ method_field('patch') }}
 
 
         <div class="field">

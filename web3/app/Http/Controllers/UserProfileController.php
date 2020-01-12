@@ -20,8 +20,37 @@ class UserProfileController extends Controller
         return view('profile', compact('user'));
     }
 
-    public function update($id)
+    public function update($id,Request $request)
     {
+        if($request->has('avatar')){
+
+            $avatar = $request->file('avatar');
+            $extension = $request->file('avatar')->getClientOriginalExtension();
+
+
+            $filename='avatar';
+            $ui=auth()->id();
+
+            $mask=Storage::disk('s3')->get('/public/mask.png');
+            //Resize
+
+            $normal = Image::make($avatar)->resize(250 , 250)->mask($mask,true)->encode($extension);
+
+            //Make image in to a circle
+
+            //$normal=Image::make($avatar)->mask('storage/app/masks/mask');
+
+
+            //Store on S3
+            Storage::disk('s3')->put('/avatars/'."{$ui}".'/'."{$filename}", (string)$normal, 'public');
+
+
+            $user = User::findorFail(Auth::user()->id);
+            $user->avatar = $filename;
+            //$user->save();
+            //return dd($avatar);
+            return redirect()->back();
+        }
         $user=User::findOrFail($id);
         if (Auth::user()->email == request('email')) {
 
@@ -58,38 +87,39 @@ class UserProfileController extends Controller
 
             return back();
         }
+
     }
     public function store(Request $request)
     {
-        if($request->has('avatar')){
-
-            $avatar = $request->file('avatar');
-            $extension = $request->file('avatar')->getClientOriginalExtension();
-
-
-            $filename='avatar';
-            $ui=auth()->id();
-
-            $mask=Storage::disk('s3')->get('/public/mask.png');
-            //Resize
-
-            $normal = Image::make($avatar)->resize(250 , 250)->mask($mask,true)->encode($extension);
-
-            //Make image in to a circle
-
-            //$normal=Image::make($avatar)->mask('storage/app/masks/mask');
-
-
-            //Store on S3
-            Storage::disk('s3')->put('/avatars/'."{$ui}".'/'."{$filename}", (string)$normal, 'public');
-
-
-            $user = User::findorFail(Auth::user()->id);
-            $user->avatar = $filename;
-            //$user->save();
-          //return dd($avatar);
-            return redirect()->back();
-        }
+//        if($request->has('avatar')){
+//
+//            $avatar = $request->file('avatar');
+//            $extension = $request->file('avatar')->getClientOriginalExtension();
+//
+//
+//            $filename='avatar';
+//            $ui=auth()->id();
+//
+//            $mask=Storage::disk('s3')->get('/public/mask.png');
+//            //Resize
+//
+//            $normal = Image::make($avatar)->resize(250 , 250)->mask($mask,true)->encode($extension);
+//
+//            //Make image in to a circle
+//
+//            //$normal=Image::make($avatar)->mask('storage/app/masks/mask');
+//
+//
+//            //Store on S3
+//            Storage::disk('s3')->put('/avatars/'."{$ui}".'/'."{$filename}", (string)$normal, 'public');
+//
+//
+//            $user = User::findorFail(Auth::user()->id);
+//            $user->avatar = $filename;
+//            //$user->save();
+//          //return dd($avatar);
+//            return redirect()->back();
+//        }
     }
 
 }

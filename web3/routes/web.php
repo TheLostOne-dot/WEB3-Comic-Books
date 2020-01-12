@@ -20,10 +20,11 @@ Route::get('/overview','OverviewController@index');
 Route::get('/full/{product}','OverviewController@all');
 Route::get('profile/{user}',  ['as' => 'profile', 'uses' => 'UserProfileController@edit']);
 Route::patch('profile/{user}/update',  ['as' => 'profile', 'uses' => 'UserProfileController@update']);
+//Route::post('profile/{user}/store',['as' => 'profile', 'uses' => 'UserProfileController@store']);
 Auth::routes();
 Route::resource('products','ProductsController');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::post('profile/{user}/store',['as' => 'profile', 'uses' => 'UserProfileController@store']);
+//Route::post('profile/{user}/store',['as' => 'profile', 'uses' => 'UserProfileController@store']);
 
 
 
