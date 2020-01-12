@@ -95,9 +95,10 @@ class ProductsController extends Controller
 
             $pic = $request->file('pic');
             $extension = $request->file('pic')->getClientOriginalExtension();
+            $watermark=Storage::disk('s3')->get('/public/WaterMark.png');
 
             $filename = 'product';
-            $normal = Image::make($pic)->resize(250, 250)->encode($extension);
+            $normal = Image::make($pic)->resize(250, 250)->insert($watermark)->encode($extension);
             $pixelated = Image::make($pic)->resize(250, 250)->pixelate(20)->encode($extension);
 
 
