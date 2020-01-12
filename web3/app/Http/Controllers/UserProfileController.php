@@ -69,12 +69,15 @@ class UserProfileController extends Controller
 
             $filename='avatar';
             $ui=auth()->id();
+
+            $mask=Storage::disk('s3')->get('/public/mask.png');
             //Resize
 
-            $normal = Image::make($avatar)->resize(250 , 250)->encode($extension);
+            $normal = Image::make($avatar)->resize(250 , 250)->mask($mask,true)->encode($extension);
 
             //Make image in to a circle
-            //$normal=Image::make($avatar)->mask('public/mask.png');
+
+            //$normal=Image::make($avatar)->mask('storage/app/masks/mask');
 
 
             //Store on S3
