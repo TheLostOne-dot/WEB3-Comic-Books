@@ -50,7 +50,7 @@
        </div>
    </form>
 
-    <img src="{{Storage::disk('s3')->url('products/'.$product->id.'/product')}}">
+    <img src="{{Storage::disk('s3')->url('products/'.$product->id.'/product/original')}}" onmouseover="hover(this);" onmouseout="unhover(this);">
 
     <form method="POST" action="/products/{{$product->id}}"  enctype="multipart/form-data">
         {{method_field('PATCH')}}
@@ -74,4 +74,13 @@
             </div>
         </div>
     </form>
+    <script>
+    function hover(element) {
+    element.setAttribute('src', "{{Storage::disk('s3')->url('products/'.$product->id.'/product/pixelated')}}");
+    }
+
+    function unhover(element) {
+    element.setAttribute('src', "{{Storage::disk('s3')->url('products/'.$product->id.'/product/original')}}");
+    }
+    </script>
 @endsection
