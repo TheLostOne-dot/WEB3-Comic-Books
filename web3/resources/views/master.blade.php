@@ -16,6 +16,8 @@
         <li><a href="/contact">Contact Us</a> </li>
         <li><a href="/about">About us</a> </li>
         <li><a href="/overview">Overview</a> </li>
+            <li><a href="/products">Products</a> </li>
+            <li><a href="/users">Users</a> </li>
                 @guest
         <li><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
                    @if (Route::has('register'))

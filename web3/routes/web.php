@@ -27,4 +27,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Route::post('profile/{user}/store',['as' => 'profile', 'uses' => 'UserProfileController@store']);
 
 
+//Route::get('/export_excel', 'ExportExcelController@index');
+//Route::get('/export_excel/excel', 'ExportExcelController@excel')->name('export_excel.excel');
+Route::get('/users/excel', 'UserController@export')->name('users.excel');
+Route::get('/users', 'UserController@index');
+
 
