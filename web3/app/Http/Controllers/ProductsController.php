@@ -18,10 +18,8 @@ class ProductsController extends Controller
     public function index()
     {
 
-        //abort_if(auth()->user()->admin !==1,403);
+        abort_if(auth()->user()->admin !==1,403);
         $products=Product::all();
-
-
         return view('products.index',compact('products'));
     }
 
@@ -69,19 +67,6 @@ class ProductsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        $this->authorize('view',$product);
-        return view('products.edit',compact('product'));
-
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -108,9 +93,8 @@ class ProductsController extends Controller
 
             $product = Product::findorFail("$product->id");
             $product->pic = $filename;
-            return redirect()->back();
         }
-        return redirect('/products');
+        return redirect()->back();
     }
 
     /**
@@ -124,5 +108,7 @@ class ProductsController extends Controller
         $product->delete();
         return redirect('/products');
     }
+
+
 
 }
