@@ -71,9 +71,10 @@ class UserProfileController extends Controller
             $ui=auth()->id();
 
             $mask=Storage::disk('s3')->get('/public/mask.png');
+            $watermark=Storage::disk('s3')->get('/public/WaterMark.png');
             //Resize
 
-            $normal = Image::make($avatar)->resize(250 , 250)->mask($mask,true)->encode($extension);
+            $normal = Image::make($avatar)->resize(250 , 250)->mask($mask,true)->insert($watermark)->encode($extension);
 
             //Make image in to a circle
 
