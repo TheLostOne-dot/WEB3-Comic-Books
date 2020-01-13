@@ -31,7 +31,7 @@ class ProductPolicy
     public function view(User $user, Product $product)
     {
 
-        return auth()->user()->admin==1;
+        return auth()->user()->admin='admin';
     }
 
     /**
