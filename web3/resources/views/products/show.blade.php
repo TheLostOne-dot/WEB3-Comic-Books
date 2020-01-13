@@ -95,7 +95,7 @@
         <div class="field">
 
             <div class="control">
-                <button type="submit" class="button">Delete Product</button>
+                <button type="submit" class="btn btn-primary">Delete Product</button>
             </div>
         </div>
     </form>
