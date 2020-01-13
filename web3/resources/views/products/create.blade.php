@@ -10,19 +10,19 @@
     </div>
 
     <div>
-        <textarea name="volume" placeholder="Product volume" required></textarea>
+        <input type="text" name="volume" placeholder="Product volume" required>
     </div>
 
     <div>
-        <textarea name="issue" placeholder="Product issue" required></textarea>
+        <input type="text" name="issue" placeholder="Product issue" required>
     </div>
 
     <div>
-        <textarea name="price" placeholder="Product price" required></textarea>
+        <input type="text" name="price" placeholder="Product price" required>
     </div>
 
     <div>
-        <textarea name="stock" placeholder="Product stock" required></textarea>
+        <input type="text" name="stock" placeholder="Product stock" required>
     </div>
 
     <div>

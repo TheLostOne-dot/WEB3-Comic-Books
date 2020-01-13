@@ -81,14 +81,15 @@ class ProductsController extends Controller
             $extension = $request->file('pic')->getClientOriginalExtension();
             $watermark=Storage::disk('s3')->get('/public/WaterMark.png');
 
+
             $filename = 'product';
             $normal = Image::make($pic)->resize(250, 250)->insert($watermark)->encode($extension);
             $pixelated = Image::make($pic)->resize(250, 250)->pixelate(20)->encode($extension);
-
+            $thumbnail=Image::make($pic)->resize(100,150);
 
             Storage::disk('s3')->put('/products/'."$product->id".'/'."{$filename}".'/original', (string)$normal, 'public');
             Storage::disk('s3')->put('/products/'."$product->id".'/'."{$filename}".'/pixelated', (string)$pixelated, 'public');
-
+            Storage::disk('s3')->put('/products/'."$product->id".'/'."{$filename}".'/thumbnail',(string)$thumbnail,'public');
 
             $product = Product::findorFail("$product->id");
             $product->pic = $filename;

@@ -18,6 +18,7 @@
 
     @foreach($products as $product)
         <li><a href="products/{{$product->id}}">{{$product->id}} {{$product->name}}</a></li>
+        <img src="{{Storage::disk('s3')->url('products/'.$product->id.'/product'.'/thumbnail')}}">
     @endforeach
 
 </body>
