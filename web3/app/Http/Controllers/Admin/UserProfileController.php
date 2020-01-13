@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
 use App\User;
-use Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image as Image;
 
 class UserProfileController extends Controller
 {
+    //
     public function __construct()
     {
         $this->middleware('auth');
@@ -98,6 +100,7 @@ class UserProfileController extends Controller
     }
     public function destroy($id)
     {
+        abort_if(auth()->user()->admin !==1,403);
         $user=User::find($id);
         $user->delete();
         return redirect('/profile');

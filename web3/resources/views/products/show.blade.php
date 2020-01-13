@@ -1,6 +1,8 @@
 @extends('master')
 @section('content')
     <h1 class="title">Edit product</h1>
+    @if(Auth::check())
+        @if(auth()->user()->admin =='admin')
     <form method="POST" action="/products/{{$product->id}}" style="margin-bottom: 1em">
 
         {{method_field('PATCH')}}
@@ -41,17 +43,34 @@
                 <input type="text" class="input" name="stock" placeholder="Stock" value="{{$product->stock}}" required>
             </div>
         </div>
-
         <div class="field">
-
             <div class="control">
                 <button type="submit" class="button is-link">Update Project</button>
             </div>
         </div>
+        @else
+            <ul>
+                <li><p>{{$product->name}}</p></li>
+                <li><p>Vol.{{$product->volume}}</p></li>
+                <li><p>Issue #{{$product->issue}}</p></li>
+                <li><p>Price: &euro;{{$product->price}}</p></li>
+                <li><p>In stock: {{$product->stock}}</p></li>
+            </ul>
+        @endif
+        @else
+            <ul>
+                <li><p>{{$product->name}}</p></li>
+                <li><p>Vol.{{$product->volume}}</p></li>
+                <li><p>Issue #{{$product->issue}}</p></li>
+                <li><p>Price: &euro;{{$product->price}}</p></li>
+                <li><p>In stock: {{$product->stock}}</p></li>
+            </ul>
+        @endif
     </form>
 
     <img src="{{Storage::disk('s3')->url('products/'.$product->id.'/product/original')}}" onmouseover="hover(this);" onmouseout="unhover(this);">
-
+    @if(Auth::check())
+        @if(auth()->user()->admin =='admin')
     <form method="POST" action="/products/{{$product->id}}"  enctype="multipart/form-data">
         {{method_field('PATCH')}}
         {{ csrf_field() }}
@@ -64,6 +83,12 @@
         </div>
 
     </form>
+        @else
+        @endif
+    @else
+    @endif
+    @if(Auth::check())
+        @if(auth()->user()->admin =='admin')
     <form method="POST" action="/products/{{$product->id}}">
         {{method_field('DELETE')}}
         {{csrf_field()}}
@@ -74,6 +99,10 @@
             </div>
         </div>
     </form>
+        @else
+        @endif
+    @else
+    @endif
     <script>
         function hover(element) {
             element.setAttribute('src', "{{Storage::disk('s3')->url('products/'.$product->id.'/product/pixelated')}}");

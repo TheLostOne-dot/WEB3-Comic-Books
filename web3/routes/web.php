@@ -14,24 +14,25 @@
 Route::get('/','PagesController@home');
 Route::get('/contact','PagesController@contact');
 Route::get('/about','PagesController@about');
+Route::get('/create','PagesController@create');
 Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
-Route::prefix('Admin')->group(function (){
-    Route::apiResource('products','Admin\ProductsController');
-    Route::apiResource('profile','Admin\UserProfileController');
+Route::namespace('Admin')->group(function (){
+    Route::apiResource('products','ProductsController');
+    Route::apiResource('profile','UserProfileController');
 
-    Route::get('/users/excel', 'Admin\UserController@export')->name('users.excel');
-    Route::get('/users', 'Admin\UserController@index');
+    Route::get('/users/excel', 'UserController@export')->name('users.excel');
+    Route::get('/users', 'UserController@index');
 });
-Route::prefix('User')->group(function (){
-    Route::apiResource('products','User\ProductsController')
+Route::namespace('User')->group(function (){
+    Route::apiResource('products','ProductsController')
     ->only(['index','show']);
-    Route::apiResource('profile','User\UserProfileController')
+    Route::apiResource('profile','UserProfileController')
     ->only(['show','update']);
 });
-Route::prefix('Guest')->group(function (){
-    Route::apiResource('products','Guest\ProductsController')
+Route::namespace('Guest')->group(function (){
+    Route::apiResource('products','ProductsController')
         ->only(['index','show']);
 });
 

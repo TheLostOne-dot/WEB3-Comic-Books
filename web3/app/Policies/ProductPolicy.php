@@ -30,8 +30,7 @@ class ProductPolicy
      */
     public function view(User $user, Product $product)
     {
-
-        return auth()->user()->admin='admin';
+        return auth()->user()->admin=='admin';
     }
 
     /**
