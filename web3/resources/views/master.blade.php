@@ -3,6 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>Comic book shop</title>
+    <link href="{{asset('http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css')}}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" >
     <link href="{{asset('css/slideshow.css')}}" rel="stylesheet" type="text/css">
 </head>
@@ -11,6 +12,7 @@
 <nav>
     <div class="container">
         <ul>
+            <li><img src={{ asset('css/logo.png') }} style="width:100%"></li>
         <li><a href="/">Home</a> </li>
         <li><a href="/contact">Contact Us</a> </li>
         <li><a href="/about">About us</a> </li>
@@ -53,7 +55,9 @@
 @yield ('content')
 </div>
 <footer>
-    <p>As of right now the footer is empty</p>
+    <p> <img src={{ asset('css/logo.png') }} ></p>
+    <p>Contacts: phone: 0885352517 email: superuser@gmail.com</p>
+    <p>© 2020 Comic Book Store</p>
 </footer>
 </body>
 </html>

@@ -1,15 +1,5 @@
 @extends('master')
     @section('content')
-<!DOCTYPE html>
-
-<html>
-
-<head>
-
-    <title></title>
-</head>
-
-<body>
     <h1>Products</h1>
     @if(Auth::check())
         @if(auth()->user()->admin =='admin')
@@ -23,9 +13,7 @@
 
     @foreach($products as $product)
         <li><a href="products/{{$product->id}}">{{$product->id}} {{$product->name}}</a></li>
+        <img src="{{Storage::disk('s3')->url('products/'.$product->id.'/product'.'/thumbnail')}}">
     @endforeach
 
-</body>
-
-</html>
 @endsection
