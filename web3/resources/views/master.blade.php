@@ -3,7 +3,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>Comic book shop</title>
-    <link href="{{asset('http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css')}}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" >
     <link href="{{asset('css/slideshow.css')}}" rel="stylesheet" type="text/css">
 </head>

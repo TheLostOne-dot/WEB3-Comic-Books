@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image as Image;
+use Illuminate\Support\Facades\Auth;
 
 class UserProfileController extends Controller
 {
