@@ -16,7 +16,7 @@ class UserProfileController extends Controller
 
     public function index()
     {
-        abort_if(auth()->user()->admin !==1,403);
+        abort_if(auth()->user()->admin !=='admin',403);
         $users=User::all();
         return view('profile.index',compact('users'));
     }
