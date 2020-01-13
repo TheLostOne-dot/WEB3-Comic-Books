@@ -14,8 +14,15 @@
         <li><a href="/">Home</a> </li>
         <li><a href="/contact">Contact Us</a> </li>
         <li><a href="/about">About us</a> </li>
-            <li><a href="Guest/products">Products</a> </li>
+            <li><a href="/products">Products</a> </li>
+            @if(Auth::check())
+                @if(auth()->user()->admin =='admin')
             <li><a href="/users">Users</a> </li>
+                    <li><a href="/profile">Profiles</a> </li>
+                @else
+                @endif
+            @else
+            @endif
                 @guest
         <li><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
                    @if (Route::has('register'))

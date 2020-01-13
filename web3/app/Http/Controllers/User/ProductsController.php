@@ -40,7 +40,7 @@ class ProductsController extends Controller
          */
         public function store()
         {
-            abort_if(auth()->user()->admin !==1,403);
+            abort_if(auth()->user()->admin !=='admin',403);
             $info=request()->validate([
                 'name'=> 'required',
                 'volume'=> 'required',

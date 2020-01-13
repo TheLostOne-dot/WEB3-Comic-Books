@@ -28,7 +28,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        return view('products.create',compact('products'));
     }
 
     /**
@@ -61,8 +61,7 @@ class ProductsController extends Controller
      */
     public function show(Product $product)
     {
-        abort_if(auth()->user()->admin !==1,403);
-        $this->authorize('view',$product);
+//        $this->authorize('view',$product);
         return view('products.show',compact('product'));
     }
 
