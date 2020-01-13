@@ -65,7 +65,7 @@ nav ul{
   text-decoration:none;
   display:block;
 }
-.main a{
+.stuff{
   text-decoration: none;
   font-family: "Comic Sans MS";
   width: 100%;
@@ -74,7 +74,7 @@ nav ul{
   text-transform: uppercase;
   font-weight: bold;
 }
-.main a:hover{
+.stuff:hover{
   color: black;
 }
 footer{

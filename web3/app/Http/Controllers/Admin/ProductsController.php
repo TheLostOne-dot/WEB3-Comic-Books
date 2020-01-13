@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Products;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -16,10 +17,15 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index():Products
     {
         $products=Product::all();
-        return view('products.index',compact('products'));
+        if(request()->view) {
+            return view('products.index', compact('products'));
+        }
+        else{
+            return new Products($products);
+        }
     }
 
     /**
@@ -38,7 +44,7 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store():Products
     {
         $info=request()->validate([
             'name'=> 'required',
@@ -49,8 +55,13 @@ class ProductsController extends Controller
         ]);
         Product::create($info);
 
+        if(request()->view) {
+            return redirect('/products');
+        }
+        else{
+            return new Products($info);
+        }
 
-        return redirect('/products');
     }
 
     /**
@@ -59,10 +70,16 @@ class ProductsController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Product $product):Products
     {
-        $this->authorize('view',$product);
-        return view('products.show',compact('product'));
+//        $this->authorize('view',$product);
+        if(request()->view) {
+            return view('products.show',compact('product'));
+        }
+        else{
+            return new Products($product);
+        }
+
     }
 
     /**
@@ -93,7 +110,13 @@ class ProductsController extends Controller
             $product = Product::findorFail("$product->id");
             $product->pic = $filename;
         }
-        return redirect()->back();
+        if(request()->view){
+            return redirect()->back();
+        }
+        else{
+            return new Products($product);
+        }
+
     }
 
     /**
@@ -102,10 +125,16 @@ class ProductsController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Product $product):Products
     {
         $product->delete();
-        return redirect('/products');
+        if(request()->view) {
+            return redirect('/products');
+        }
+        else {
+            return new Products($product);
+        }
+
     }
 
 
